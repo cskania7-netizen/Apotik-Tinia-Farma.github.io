@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="id"> <!--membuka dokumen, lang="id" berarti web pake bahasa indonesia sebagai bahasa utama-->
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Apotik Tinia Farma - Apotek Online</title>
+  <meta name="description" content="Apotik Tinia Farma - Belanja obat mudah, cepat, dan aman." /> <!--deskripsi halaman yang akan muncul di google--> 
+    <link rel="stylesheet" type="text/css" href="setail.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="halamanlogo">
+        <img src="logo.png.jpeg">
+      </div>
+      <h2>APOTIK TINIA FARMA</h2>
+    </div>
+    <nav aria-label="Main">
+      <a href="#home">Home</a>
+      <a href="#inventory">Obat</a>
+      <a href="#contact">Kontak</a>
+    </nav>
+  </header>
+<article>
+  <div class="animasi-imej" id="gambar"></div>
+</article>
+  <main class="container" id="home">
+    <section class="hero">
+      <div class="hero-card">
+        <h1>Apotik Tinia Farma — Apotik Online Hemat & Terpercaya</h1>
+        <p>Cari obat yang kamu butuhkan dengan cepat. Tersedia obat bebas, suplemen, dan layanan konsultasi ringkas.</p>
+
+        <div class="search" role="search">
+          <input id="searchInput" type="search" placeholder="Cari obat / merek / khasiat..." aria-label="Cari obat"> <!--tempat buat nyari obatnya-->
+          <button id="searchBtn">Cari</button><!--tombol utk memicu fungsi pencarian-->
+        </div>
+
+        <div class="quick">
+          <div class="pill">Pengantaran hari ini</div>
+          <div class="pill">Pembayaran COD</div>
+          <div class="pill">Resep diterima</div>
+        </div>
+
+        <div style="margin-top:18px">
+          <h3 class="muted">Kategori populer</h3>
+          <div class="listobat">
+            <button class="btn btn-ghost" onclick="filterCategory('Antibiotik')">Antibiotik</button><!--menjalankan fungsi JS namanya filterCategory() ketika di klik--> <!--onclick buat ngejalanin fungsi JS saat elemen diklik-->
+            <button class="btn btn-ghost" onclick="filterCategory('Pediatrik')">Pediatrik</button>
+            <button class="btn btn-ghost" onclick="filterCategory('Suplemen')">Suplemen</button>
+            <button class="btn btn-ghost" onclick="filterCategory('Analgesik')">Analgesik</button>
+            <button class="btn btn-ghost" onclick="resetFilter()">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="sidebar" aria-labelledby="cartTitle"><!--biar bisa bikin konten menyamping--> 
+        <h3 id="cartTitle">Keranjang</h3><!--judul buat bagian keranjang-->
+        <div id="cartList"><!--tempat item keranjang ntar dimasukin sm JS-->
+          <div class="muted">Belum ada item di keranjang.</div> 
+        </div>
+        <div class="checkout">
+          <button class="btn btn-primary" onclick="checkout()">Checkout</button><!--buat nge proses checkout obat-->
+          <button class="btn" onclick="clearCart()">Bersihkan</button><!--buat ngehapus semua item di keranjang-->
+        </div>
+        <hr class="kontakeuy">
+        <h4>Kontak</h4>
+        <p class="muted">Jalan Sehat No.1, Jakarta<br>Tel: 021-555-1234</p>
+      </aside>
+    </section>
+
+    <section id="inventory" class="inventory"><!--bagian daftar obat-->
+      <div class="card-title">
+        <h2>Daftar Obat</h2>
+        <div class="namaobat">
+          <label class="muted">Urutkan:</label>
+          <select id="sortSelect" onchange="renderTable()"> <!--klo opsi berubah, fungsi renderTable () aktif buat ngurutin data-->
+            <option value="name">Nama (A-Z)</option>
+            <option value="price">Harga (Termurah)</option>
+            <option value="stock">Stok (Tinggi)</option>
+          </select>
+        </div>
+      </div>
+
+      <table id="medTable" aria-describedby="inventory"><!--id=medTable utk mengisi tabel obat secara dinamis, buat styling CSS--> <!--menghubungkan satu elemen dgn elemen a=lain yg menjelaskan elemen itu-->
+        <thead><!--nama kolom-->
+          <tr>
+            <th>Nama</th>
+            <th>Kategori</th>
+            <th>Deskripsi</th>
+            <th>Harga</th>
+            <th>Stok</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="medTableBody"></tbody><!--utk menampung isi utama tabel-->
+      </table>
+    </section>
+
+    <section id="contact" class="hubungin"><!--bagian utk menghubungi apotik nantinya-->
+      <h3>Hubungi Kami</h3>
+      <form onsubmit="event.preventDefault(); submitContact();"><!--event.preventDefault buat mencegah halaman reload, submitContact buat JS memproses form-->
+        <div class="desainkontak">
+          <input id="name" placeholder="Nama" class="namakontak">
+          <input id="email" type="email" placeholder="Email" class="emailkm">
+        </div>
+        <textarea id="message" placeholder="Pesan / pertanyaan" class="pesan"></textarea>
+        <div class="tombolkirim">
+          <button class="btn btn-primary">Kirim Pesan</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-sosmed">
+        <p>Social Media</p>
+        <ul>
+          <li><img src="fesnuk.png"></li>
+          <li><img src="igeh.png"></li>
+          <li><img src="eks.png"></li>
+        </ul>
+      </div>
+    </div>
+    © <span id="year" class="kopirek"></span> Apotik Tinia Farma - Kania/20, Tristan/35 (XI.4) <!--JS ngisi tahun secara otomatis-->
+  </footer>
+<script type="text/javascript" src="yaitulah.js" defer></script>
+</body>
+</html>
